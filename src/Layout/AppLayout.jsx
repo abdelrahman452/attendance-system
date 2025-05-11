@@ -24,18 +24,8 @@ function getItem(label, key, icon, children, path) {
 
 const items = [
   getItem("Dashboard", "1", <PieChartOutlined />, null, "/"),
-  getItem("Public Vacation", "2", <DesktopOutlined />, null, "/publicvacation"),
-  getItem(
-    "User",
-    "sub1",
-    <UserOutlined />,
-    [
-      getItem("Tom", "3", null, null, "/users/tom"),
-      getItem("Bill", "4", null, null, "/users/bill"),
-      getItem("Alex", "5", null, null, "/users/alex"),
-    ],
-    "/users"
-  ),
+  getItem("Branches", "2", <UserOutlined />, null, "/branches"),
+  getItem("Public Vacation", "3", <DesktopOutlined />, null, "/publicvacation"),
   getItem(
     "Team",
     "sub2",

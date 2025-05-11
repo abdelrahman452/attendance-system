@@ -1,8 +1,8 @@
 import { Table, Popconfirm, Button, ConfigProvider, message } from "antd";
 import { useState } from "react";
-import AddVacationForm from "./AddVacationForm";
+import AddBranchForm from "./AddBranchForm";
 
-const PublicVacation = () => {
+const Branches = () => {
   const [showForm, setShowForm] = useState(null);
   return (
     <>
@@ -34,9 +34,9 @@ const PublicVacation = () => {
           </>
         </div>
       )}
-      {showForm && <AddVacationForm onClick={() => setShowForm(false)} />}
+      {showForm && <AddBranchForm onClick={() => setShowForm(false)} />}
     </>
   );
 };
 
-export default PublicVacation;
+export default Branches;
