@@ -1,6 +1,6 @@
-import React from "react";
+import { Button, Form, Input } from "antd";
 
-const AddBranchForm = ({ onClick }) => {
+const AddBranchForm = ({ onClick, onFinish }) => {
   return (
     <div className="mx-auto flex flex-col items-center w-[800px] gap-8 bg-white rounded-2xl border border-gray-200 px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6 ">
       <Button type="default" onClick={onClick} className="self-end ">
@@ -10,7 +10,7 @@ const AddBranchForm = ({ onClick }) => {
       <Form
         name="basic"
         layout="vertical"
-        //   onFinish={onFinish}
+        onFinish={onFinish}
         //   onFinishFailed={onFinishFailed}
         autoComplete="off"
       >

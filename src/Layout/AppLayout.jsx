@@ -84,11 +84,11 @@ const AppLayout = () => {
         onCollapse={(value) => setCollapsed(value)}
         breakpoint="lg"
         collapsedWidth="80"
-        width={220}
+        width={250}
       >
         <div
           style={{
-            height: 32,
+            // height: 32,
             margin: 16,
             background: "rgba(255, 255, 255, 0.2)",
           }}

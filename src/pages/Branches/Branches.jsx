@@ -1,9 +1,25 @@
 import { Table, Popconfirm, Button, ConfigProvider, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddBranchForm from "./AddBranchForm";
-
+import { branchesColumn } from "../../constant/index";
+import { getBranches, addBranches } from "../../Services/branchesApi";
 const Branches = () => {
   const [showForm, setShowForm] = useState(null);
+  const [branches, setBranches] = useState([]);
+  const handleAddBranch = (values) => {
+    addBranches(values);
+  };
+  const handleGetBranches = async () => {
+    try {
+      const data = await getBranches();
+      setBranches(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  useEffect(() => {
+    handleGetBranches();
+  }, []);
   return (
     <>
       {!showForm && (
@@ -27,14 +43,19 @@ const Branches = () => {
               rowClassName={(_, index) => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
-              columns={[]}
-              dataSource={[]}
+              columns={branchesColumn}
+              dataSource={branches}
               rowKey="key"
             />
           </>
         </div>
       )}
-      {showForm && <AddBranchForm onClick={() => setShowForm(false)} />}
+      {showForm && (
+        <AddBranchForm
+          onFinish={handleAddBranch}
+          onClick={() => setShowForm(false)}
+        />
+      )}
     </>
   );
 };
