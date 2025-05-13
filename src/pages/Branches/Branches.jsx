@@ -1,4 +1,4 @@
-import { Table, Popconfirm, Button, ConfigProvider, message } from "antd";
+import { Table, Popconfirm, Button, ConfigProvider } from "antd";
 import { useEffect, useState } from "react";
 import AddBranchForm from "./AddBranchForm";
 import { branchesColumn } from "../../constant/index";
@@ -6,17 +6,31 @@ import { getBranches, addBranches } from "../../Services/branchesApi";
 const Branches = () => {
   const [showForm, setShowForm] = useState(null);
   const [branches, setBranches] = useState([]);
-  const handleAddBranch = (values) => {
-    addBranches(values);
+  const handleAddBranch = async (values) => {
+    try {
+      await addBranches(values);
+      await handleGetBranches();
+      setShowForm(false);
+    } catch (error) {
+      console.error(error);
+    }
   };
+
   const handleGetBranches = async () => {
     try {
       const data = await getBranches();
-      setBranches(data);
+
+      setBranches(
+        data.response?.map((item) => ({
+          ...item,
+          key: item.id,
+        }))
+      );
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
     handleGetBranches();
   }, []);

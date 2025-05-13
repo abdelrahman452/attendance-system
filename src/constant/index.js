@@ -1,13 +1,29 @@
-const branchesColumn=[ {
+const branchesColumn=[ 
+  {
       title: "Branch Name",
       dataIndex: "name",
       key: "name",
       sorter: (a, b) =>
         a.name.localeCompare(b.name),
-    },{
-      title: "Branch Code",
-      dataIndex: "code",
-      key: "code",
+    },
+  {
+      title: "Longitude",
+      dataIndex: "longitude",
+      key: "name",
+      sorter: (a, b) =>
+        a.name.localeCompare(b.name),
+    },
+  {
+      title: "Latitude",
+      dataIndex: "latitude",
+      key: "name",
+      sorter: (a, b) =>
+        a.name.localeCompare(b.name),
+    },
+    {
+      title: "Location",
+      dataIndex: "location",
+      key: "location",
     //   sorter: (a, b) =>
     //     a.name.localeCompare(b.name),
     },]

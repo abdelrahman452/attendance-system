@@ -15,25 +15,32 @@ const AddBranchForm = ({ onClick, onFinish }) => {
         autoComplete="off"
       >
         <Form.Item
-          label="Barcode"
-          name="barcode"
-          rules={[{ required: true, message: "Please input Barcode" }]}
-        >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
-        </Form.Item>
-
-        <Form.Item
-          label="Name"
+          label="Branch Name"
           name="name"
-          rules={[{ required: true, message: "Please input name" }]}
+          rules={[{ required: true, message: "Please input Branch Name" }]}
         >
           <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
         </Form.Item>
 
         <Form.Item
-          label="Address"
-          name="address"
-          rules={[{ required: true, message: "Please input address" }]}
+          label="Branch Location"
+          name="location"
+          rules={[{ required: true, message: "Please input Branch Name" }]}
+        >
+          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+        </Form.Item>
+
+        <Form.Item
+          label="Latitude"
+          name="latitude"
+          rules={[{ required: true, message: "Please input Branch Latitude" }]}
+        >
+          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+        </Form.Item>
+        <Form.Item
+          label="Longitude"
+          name="longitude"
+          rules={[{ required: true, message: "Please input Branch Longitude" }]}
         >
           <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
         </Form.Item>
