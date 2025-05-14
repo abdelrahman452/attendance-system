@@ -25,17 +25,17 @@ function getItem(label, key, icon, children, path) {
 const items = [
   getItem("Dashboard", "1", <PieChartOutlined />, null, "/"),
   getItem("Branches", "2", <UserOutlined />, null, "/branches"),
-  getItem("Public Vacation", "3", <DesktopOutlined />, null, "/publicvacation"),
-  getItem(
-    "Team",
-    "sub2",
-    <TeamOutlined />,
-    [
-      getItem("Team 1", "6", null, null, "/teams/1"),
-      getItem("Team 2", "8", null, null, "/teams/2"),
-    ],
-    "/teams"
-  ),
+  getItem("Public Holiday", "3", <DesktopOutlined />, null, "/publicholiday"),
+  // getItem(
+  //   "Team",
+  //   "sub2",
+  //   <TeamOutlined />,
+  //   [
+  //     getItem("Team 1", "6", null, null, "/teams/1"),
+  //     getItem("Team 2", "8", null, null, "/teams/2"),
+  //   ],
+  //   "/teams"
+  // ),
   getItem("Files", "9", <FileOutlined />, null, "/files"),
 ];
 
@@ -88,9 +88,9 @@ const AppLayout = () => {
       >
         <div
           style={{
-            // height: 32,
+            height: 32,
             margin: 16,
-            background: "rgba(255, 255, 255, 0.2)",
+            // background: "rgba(255, 255, 255, 0.2)",
           }}
         />
         <Menu

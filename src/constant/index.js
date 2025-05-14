@@ -27,4 +27,27 @@ const branchesColumn=[
     //   sorter: (a, b) =>
     //     a.name.localeCompare(b.name),
     },]
-    export {branchesColumn}
+    const holidaysColumn=[
+     
+      {
+       title: "Date",
+      dataIndex: "date",
+      key: "date",
+      sorter: (a, b) =>
+        a.date.localeCompare(b.date),
+    },
+      {
+       title: "Day",
+      dataIndex: "day",
+      key: "day",
+      sorter: (a, b) =>
+        a.day.localeCompare(b.day),
+    }, {
+       title: "Holiday Name",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a, b) =>
+        a.name.localeCompare(b.name),
+    },
+  ]
+    export {branchesColumn,holidaysColumn}
