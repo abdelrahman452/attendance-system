@@ -1,39 +1,21 @@
-import { Table, Popconfirm, Button, ConfigProvider } from "antd";
-import { useEffect, useState } from "react";
-import AddBranchForm from "./AddBranchForm";
-import { branchesColumn } from "../../constant/index";
-import { getBranches, addBranches } from "../../Services/branchesApi";
-const Branches = () => {
-  const [showForm, setShowForm] = useState(null);
-  const [branches, setBranches] = useState([]);
-  const handleAddBranch = async (values) => {
-    try {
-      await addBranches(values);
+import { Table, Button } from "antd";
+import { useState } from "react";
+import AddShiftForm from "./AddShiftForm";
+import { shiftsColumns } from "../../constant";
+import { addShifts } from "../../Services/shifts";
 
+const Shifts = () => {
+  const [showForm, setShowForm] = useState(null);
+
+  const handleAddShift = async (values) => {
+    try {
+      await addShifts(values);
       setShowForm(false);
     } catch (error) {
       console.error(error);
     }
   };
 
-  const handleGetBranches = async () => {
-    try {
-      const data = await getBranches();
-
-      setBranches(
-        data.response?.map((item) => ({
-          ...item,
-          key: item.id,
-        }))
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    handleGetBranches();
-  }, []);
   return (
     <>
       {!showForm && (
@@ -57,16 +39,16 @@ const Branches = () => {
               rowClassName={(_, index) => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
-              columns={branchesColumn}
-              dataSource={branches}
+              columns={shiftsColumns}
+              dataSource={[]}
               rowKey="key"
             />
           </>
         </div>
       )}
       {showForm && (
-        <AddBranchForm
-          onFinish={handleAddBranch}
+        <AddShiftForm
+          onFinish={handleAddShift}
           onClick={() => setShowForm(false)}
         />
       )}
@@ -74,4 +56,4 @@ const Branches = () => {
   );
 };
 
-export default Branches;
+export default Shifts;

@@ -1,6 +1,6 @@
 import axios from "./axiosInstance"
 
-const getBranches=async ()=>{
+const getShifts=async ()=>{
   
     try {
     const response=await axios.get(`${import.meta.env.VITE_API_BASE}api/Branches/GetAllBranches`);
@@ -12,7 +12,7 @@ const getBranches=async ()=>{
     console.error(error)
 }
 }
-const addBranches=async(values)=>{
+const addShifts=async(values)=>{
   
   try {
       const response=await axios.post(`${import.meta.env.VITE_API_BASE}api/Branches/CreateBranch`,values)
@@ -21,4 +21,4 @@ const addBranches=async(values)=>{
     console.log(error)
   }
 }
-export {getBranches,addBranches}
+export {getShifts,addShifts}

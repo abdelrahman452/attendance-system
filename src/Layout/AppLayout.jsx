@@ -26,6 +26,7 @@ const items = [
   getItem("Dashboard", "1", <PieChartOutlined />, null, "/"),
   getItem("Branches", "2", <UserOutlined />, null, "/branches"),
   getItem("Public Holiday", "3", <DesktopOutlined />, null, "/publicholiday"),
+  getItem("Shifts", "9", <FileOutlined />, null, "/shifts"),
   // getItem(
   //   "Team",
   //   "sub2",
@@ -36,7 +37,6 @@ const items = [
   //   ],
   //   "/teams"
   // ),
-  getItem("Files", "9", <FileOutlined />, null, "/files"),
 ];
 
 const AppLayout = () => {
