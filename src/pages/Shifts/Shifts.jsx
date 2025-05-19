@@ -1,21 +1,47 @@
-import { Table, Button } from "antd";
+import { Table, Button, message } from "antd";
 import { useState } from "react";
 import AddShiftForm from "./AddShiftForm";
 import { shiftsColumns } from "../../constant";
-import { addShifts } from "../../Services/shifts";
+import axios from "../../Services/axiosInstance";
 
 const Shifts = () => {
   const [showForm, setShowForm] = useState(null);
-
-  const handleAddShift = async (values) => {
+  // add Shift
+  const addShifts = async (values) => {
+    message.destroy();
+    const formattedValues = {
+      ...values,
+      startTime: values.startTime.format("HH:mm:ss"),
+      endTime: values.endTime.format("HH:mm:ss"),
+    };
+    console.log(formattedValues);
     try {
-      await addShifts(values);
+      await axios.post(`api/Shifts/Create`, formattedValues);
+      message.success("Shift added successfully");
       setShowForm(false);
     } catch (error) {
-      console.error(error);
+      console.log(error);
+      message.error("Something went wrong. Please try again.");
     }
   };
 
+  // get shifts Data
+
+  // const getShifts = async () => {
+  //   try {
+  //     const response = await axios.get("PublicHolidays/GetAll");
+  //     const data = response.data.response;
+  //     setHolidays(
+  //       data.map((item) => {
+  //         return { ...item, key: item.id };
+  //       })
+  //     );
+  //   } catch (error) {
+  //     console.error(`${error.message}`);
+  //   } finally {
+  //     console.log("done");
+  //   }
+  // };
   return (
     <>
       {!showForm && (
@@ -47,10 +73,7 @@ const Shifts = () => {
         </div>
       )}
       {showForm && (
-        <AddShiftForm
-          onFinish={handleAddShift}
-          onClick={() => setShowForm(false)}
-        />
+        <AddShiftForm onFinish={addShifts} onClick={() => setShowForm(false)} />
       )}
     </>
   );

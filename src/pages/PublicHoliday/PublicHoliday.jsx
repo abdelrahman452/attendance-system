@@ -1,16 +1,16 @@
 import { Table, Popconfirm, Button, ConfigProvider, message, Form } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddHolidayForm from "./AddHolidayForm";
 import { holidaysColumn } from "../../constant";
-import { addFormData } from "../../Services/PublicHoliday";
+import axios from "../../Services/axiosInstance";
 const PublicHoliday = () => {
-  const [loading, setLoading] = useState(false);
   const [showForm, setShowForm] = useState(null);
+  const [holidays, setHolidays] = useState([]);
 
   //add holiday
-  const handleAddHoliday = async (values) => {
+  const addHoliday = async (values) => {
+    message.destroy();
     try {
-      setLoading(true);
       const formattedValues = {
         ...values,
         startDate: values.startDate
@@ -20,15 +20,35 @@ const PublicHoliday = () => {
           .endOf("day")
           .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
       };
-      await addFormData(formattedValues);
+      await axios.post(`api/PublicHolidays/Add`, formattedValues);
       message.success("Holiday added successfully");
+      setShowForm(false);
     } catch (error) {
       console.error(error);
       message.error("Something went wrong. Please try again.");
     } finally {
-      setLoading(false);
+      console.log("done");
     }
   };
+
+  const getHolidays = async () => {
+    try {
+      const response = await axios.get("PublicHolidays/GetAll");
+      const data = response.data.response;
+      setHolidays(
+        data.map((item) => {
+          return { ...item, key: item.id };
+        })
+      );
+    } catch (error) {
+      console.error(`${error.message}`);
+    } finally {
+      console.log("done");
+    }
+  };
+  useEffect(() => {
+    getHolidays();
+  }, []);
   return (
     <>
       {!showForm && (
@@ -53,7 +73,7 @@ const PublicHoliday = () => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
               columns={holidaysColumn}
-              dataSource={[]}
+              dataSource={holidays}
               rowKey="key"
             />
           </>
@@ -61,7 +81,7 @@ const PublicHoliday = () => {
       )}
       {showForm && (
         <AddHolidayForm
-          onFinish={handleAddHoliday}
+          onFinish={addHoliday}
           onClick={() => setShowForm(false)}
         />
       )}

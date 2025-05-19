@@ -1,4 +1,4 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, InputNumber } from "antd";
 
 const AddBranchForm = ({ onClick, onFinish }) => {
   return (
@@ -35,14 +35,14 @@ const AddBranchForm = ({ onClick, onFinish }) => {
           name="latitude"
           rules={[{ required: true, message: "Please input Branch Latitude" }]}
         >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+          <Input inputMode="numeric" pattern="[0-9]*" />
         </Form.Item>
         <Form.Item
           label="Longitude"
           name="longitude"
           rules={[{ required: true, message: "Please input Branch Longitude" }]}
         >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+          <Input inputMode="numeric" pattern="[0-9]*" />
         </Form.Item>
 
         <Form.Item>

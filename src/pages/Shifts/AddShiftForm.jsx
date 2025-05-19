@@ -1,13 +1,6 @@
-import { Button, Form, Input } from "antd";
+import { Button, Form, Input, InputNumber, Radio, TimePicker } from "antd";
 
 const AddShiftForm = ({ onClick, onFinish }) => {
-  /**{
-"name": "string",
-"startTime": "string",
-"endTime": "string",
-"isCrossDay": true
-}
- */
   return (
     <div className="mx-auto flex flex-col items-center w-[800px] gap-8 bg-white rounded-2xl border border-gray-200 px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6 ">
       <Button type="default" onClick={onClick} className="self-end ">
@@ -30,26 +23,28 @@ const AddShiftForm = ({ onClick, onFinish }) => {
         </Form.Item>
 
         <Form.Item
-          label="Branch "
-          name="location"
-          rules={[{ required: true, message: "Please input Branch Name" }]}
+          label="Start Time "
+          name="startTime"
+          rules={[{ required: true, message: "Please input Start Time" }]}
         >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+          <TimePicker style={{ width: "100%" }} />
         </Form.Item>
 
         <Form.Item
-          label="Latitude"
-          name="latitude"
-          rules={[{ required: true, message: "Please input Branch Latitude" }]}
+          label="End Time"
+          name="endTime"
+          rules={[{ required: true, message: "Please input End Time" }]}
         >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+          <TimePicker style={{ width: "100%" }} />
         </Form.Item>
-        <Form.Item
-          label="Longitude"
-          name="longitude"
-          rules={[{ required: true, message: "Please input Branch Longitude" }]}
-        >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+
+        <Form.Item label="Cross Day" name="isCrossDay">
+          <Radio.Group
+            options={[
+              { value: true, label: "True" },
+              { value: false, label: "False" },
+            ]}
+          />
         </Form.Item>
 
         <Form.Item>

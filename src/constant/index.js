@@ -73,4 +73,12 @@ const branchesColumn=[
         a.end.localeCompare(b.end),
     },
   ]
-    export {branchesColumn,holidaysColumn,shiftsColumns}
+  const departmentsColumn=[{
+       title: "Name",
+      dataIndex: "name",
+      key: "name",
+      sorter: (a, b) =>
+        a.name.localeCompare(b.name),
+    },]
+    export {branchesColumn,holidaysColumn,shiftsColumns,departmentsColumn}
+   

@@ -1,38 +1,20 @@
 import { Table, Button, message } from "antd";
 import { useEffect, useState } from "react";
-import AddBranchForm from "./AddBranchForm";
-import { branchesColumn } from "../../constant/index";
 import axios from "../../Services/axiosInstance";
+import { departmentsColumn } from "../../constant";
 
-const Branches = () => {
+const Departments = () => {
   const [showForm, setShowForm] = useState(null);
-  const [branches, setBranches] = useState([]);
-  //Add Branch Function
-  const addBranches = async (values) => {
-    try {
-      const response = await axios.post(`api/Branches/CreateBranch`, values);
+  const [departments, setDepartments] = useState([]);
 
-      getBranches();
-      message.success("Branch added successfully");
-      setShowForm(false);
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        message.error("Branch already exists");
-      } else {
-        message.error(error.message);
-      }
-    }
-  };
-
-  //getting Branches Data
-  const getBranches = async () => {
+  const getDepartments = async () => {
     message.destroy();
 
     try {
-      const response = await axios.get(`api/Branches/GetAllBranches`);
+      const response = await axios.get(``);
 
       const data = response.data.response;
-      setBranches(
+      setDepartments(
         data?.map((item) => ({
           ...item,
           key: item.id,
@@ -41,12 +23,11 @@ const Branches = () => {
     } catch (error) {
       console.error(error);
     } finally {
-      console.log("Branches fetched successfully");
+      console.log("Departments fetched successfully");
     }
   };
-
   useEffect(() => {
-    getBranches();
+    getDepartments();
   }, []);
   return (
     <>
@@ -71,21 +52,21 @@ const Branches = () => {
               rowClassName={(_, index) => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
-              columns={branchesColumn}
-              dataSource={branches}
+              columns={departmentsColumn}
+              dataSource={departments}
               rowKey="key"
             />
           </>
         </div>
       )}
-      {showForm && (
+      {/* {showForm && (
         <AddBranchForm
-          onFinish={addBranches}
+          // onFinish={}
           onClick={() => setShowForm(false)}
         />
-      )}
+      )} */}
     </>
   );
 };
 
-export default Branches;
+export default Departments;
