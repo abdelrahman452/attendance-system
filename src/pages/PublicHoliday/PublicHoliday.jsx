@@ -33,7 +33,7 @@ const PublicHoliday = () => {
 
   const getHolidays = async () => {
     try {
-      const response = await axios.get("PublicHolidays/GetAll");
+      const response = await axios.get("api/PublicHolidays/GetAll");
       const data = response.data.response;
       setHolidays(
         data.map((item) => {

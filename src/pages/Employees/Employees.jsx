@@ -1,36 +1,53 @@
 import { Table, Button, message } from "antd";
 import { useEffect, useState } from "react";
+import { employeesColumn } from "../../constant";
 import axios from "../../Services/axiosInstance";
-import { departmentsColumn } from "../../constant";
-import AddDepartmentForm from "./AddDepartmentForm";
-
-const Departments = () => {
+import AddEmployeeForm from "./AddEmployeeForm";
+const Employees = () => {
   const [showForm, setShowForm] = useState(null);
-  const [departments, setDepartments] = useState([]);
-  //Get Department Data
+  const [employees, setEmployees] = useState([]);
 
-  const getDepartments = async () => {
+  //add holiday
+  const addEmployee = async (values) => {
     message.destroy();
-
     try {
-      const response = await axios.get(`api/Departments/GetAllDepartments`);
-
-      const data = response.data.response;
-      setDepartments(
-        data?.map((item) => ({
-          ...item,
-          key: item.id,
-        }))
-      );
+      const formattedValues = {
+        ...values,
+        startDate: values.startDate
+          .startOf("day")
+          .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+        endDate: values.endDate
+          .endOf("day")
+          .format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
+      };
+      await axios.post(`api/PublicHolidays/Add`, formattedValues);
+      message.success("Holiday added successfully");
+      setShowForm(false);
     } catch (error) {
       console.error(error);
+      message.error("Something went wrong. Please try again.");
     } finally {
-      console.log("Departments fetched successfully");
+      console.log("done");
     }
   };
 
+  const getEmployees = async () => {
+    try {
+      const response = await axios.get("api/Accounting/GetAllUsers");
+      const data = response.data.response;
+      setEmployees(
+        data.map((item) => {
+          return { ...item, key: item.userId };
+        })
+      );
+    } catch (error) {
+      console.error(`${error.message}`);
+    } finally {
+      console.log("done");
+    }
+  };
   useEffect(() => {
-    getDepartments();
+    getEmployees();
   }, []);
   return (
     <>
@@ -55,22 +72,21 @@ const Departments = () => {
               rowClassName={(_, index) => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
-              columns={departmentsColumn}
-              dataSource={departments}
+              columns={employeesColumn}
+              dataSource={employees}
               rowKey="key"
             />
           </>
         </div>
       )}
       {showForm && (
-        <AddDepartmentForm
-          // onFinish={}
+        <AddEmployeeForm
+          onFinish={addEmployee}
           onClick={() => setShowForm(false)}
-          departments={departments}
         />
       )}
     </>
   );
 };
 
-export default Departments;
+export default Employees;

@@ -38,15 +38,6 @@ const AddShiftForm = ({ onClick, onFinish }) => {
           <TimePicker style={{ width: "100%" }} />
         </Form.Item>
 
-        <Form.Item label="Cross Day" name="isCrossDay">
-          <Radio.Group
-            options={[
-              { value: true, label: "True" },
-              { value: false, label: "False" },
-            ]}
-          />
-        </Form.Item>
-
         <Form.Item>
           <Button type="primary" htmlType="submit">
             Submit

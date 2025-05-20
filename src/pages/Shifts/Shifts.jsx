@@ -1,11 +1,12 @@
 import { Table, Button, message } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AddShiftForm from "./AddShiftForm";
 import { shiftsColumns } from "../../constant";
 import axios from "../../Services/axiosInstance";
 
 const Shifts = () => {
   const [showForm, setShowForm] = useState(null);
+  const [shifts, setShifts] = useState([]);
   // add Shift
   const addShifts = async (values) => {
     message.destroy();
@@ -14,10 +15,11 @@ const Shifts = () => {
       startTime: values.startTime.format("HH:mm:ss"),
       endTime: values.endTime.format("HH:mm:ss"),
     };
-    console.log(formattedValues);
+
     try {
       await axios.post(`api/Shifts/Create`, formattedValues);
       message.success("Shift added successfully");
+      getShifts();
       setShowForm(false);
     } catch (error) {
       console.log(error);
@@ -27,21 +29,25 @@ const Shifts = () => {
 
   // get shifts Data
 
-  // const getShifts = async () => {
-  //   try {
-  //     const response = await axios.get("PublicHolidays/GetAll");
-  //     const data = response.data.response;
-  //     setHolidays(
-  //       data.map((item) => {
-  //         return { ...item, key: item.id };
-  //       })
-  //     );
-  //   } catch (error) {
-  //     console.error(`${error.message}`);
-  //   } finally {
-  //     console.log("done");
-  //   }
-  // };
+  const getShifts = async () => {
+    try {
+      const response = await axios.get("api/Shifts/GetAll");
+      const data = response.data.response;
+      setShifts(
+        data.map((item) => {
+          return { ...item, key: item.id };
+        })
+      );
+    } catch (error) {
+      console.error(`${error.message}`);
+    } finally {
+      console.log("done");
+    }
+  };
+
+  useEffect(() => {
+    getShifts();
+  }, []);
   return (
     <>
       {!showForm && (
@@ -66,7 +72,7 @@ const Shifts = () => {
                 return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
               }}
               columns={shiftsColumns}
-              dataSource={[]}
+              dataSource={shifts}
               rowKey="key"
             />
           </>

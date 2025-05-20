@@ -27,7 +27,8 @@ const items = [
   getItem("Branches", "2", <UserOutlined />, null, "/branches"),
   getItem("Public Holiday", "3", <DesktopOutlined />, null, "/publicholiday"),
   getItem("Shifts", "4", <FileOutlined />, null, "/shifts"),
-  getItem("Departments", "5", <PieChartOutlined />, null, "/departments"),
+  getItem("Employees", "5", <PieChartOutlined />, null, "/employees"),
+  getItem("Departments", "6", <PieChartOutlined />, null, "/departments"),
   // getItem(
   //   "Team",
   //   "sub2",
