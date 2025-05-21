@@ -1,37 +1,12 @@
-import { Table, Button, message } from "antd";
-import { useEffect, useState } from "react";
-import axios from "../../Services/axiosInstance";
+import { Table, Button } from "antd";
+import { useState } from "react";
 import { departmentsColumn } from "../../constant";
 import AddDepartmentForm from "./AddDepartmentForm";
+import useDepartments from "../../hooks/useDepartments";
 
 const Departments = () => {
   const [showForm, setShowForm] = useState(null);
-  const [departments, setDepartments] = useState([]);
-  //Get Department Data
-
-  const getDepartments = async () => {
-    message.destroy();
-
-    try {
-      const response = await axios.get(`api/Departments/GetAllDepartments`);
-
-      const data = response.data.response;
-      setDepartments(
-        data?.map((item) => ({
-          ...item,
-          key: item.id,
-        }))
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      console.log("Departments fetched successfully");
-    }
-  };
-
-  useEffect(() => {
-    getDepartments();
-  }, []);
+  const { departments, reFetch } = useDepartments();
   return (
     <>
       {!showForm && (

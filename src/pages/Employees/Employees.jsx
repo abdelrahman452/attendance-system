@@ -1,12 +1,12 @@
 import { Table, Button, message } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { employeesColumn } from "../../constant";
 import axios from "../../Services/axiosInstance";
 import AddEmployeeForm from "./AddEmployeeForm";
+import useEmployees from "../../hooks/useEmployees";
 const Employees = () => {
   const [showForm, setShowForm] = useState(null);
-  const [employees, setEmployees] = useState([]);
-
+  const { employees } = useEmployees();
   //add holiday
   const addEmployee = async (values) => {
     message.destroy();
@@ -31,24 +31,6 @@ const Employees = () => {
     }
   };
 
-  const getEmployees = async () => {
-    try {
-      const response = await axios.get("api/Accounting/GetAllUsers");
-      const data = response.data.response;
-      setEmployees(
-        data.map((item) => {
-          return { ...item, key: item.userId };
-        })
-      );
-    } catch (error) {
-      console.error(`${error.message}`);
-    } finally {
-      console.log("done");
-    }
-  };
-  useEffect(() => {
-    getEmployees();
-  }, []);
   return (
     <>
       {!showForm && (

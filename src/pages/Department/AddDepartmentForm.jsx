@@ -1,8 +1,9 @@
 import { Button, Form, Input, Select } from "antd";
-import { label } from "framer-motion/client";
+import useEmployees from "../../hooks/useEmployees";
 const AddDepartmentForm = ({ onFinish, onClick }) => {
+  const { employees } = useEmployees();
   /**Parent Department:
-[▼ None (Top-level)       ] ← will send 0
+[▼ None (Top-level)       ] ← will send null
 [   Marketing             ]
 [   IT                    ]
 [   HR                    ] 
@@ -10,9 +11,15 @@ const AddDepartmentForm = ({ onFinish, onClick }) => {
   "name": "string",
   "description": "string",
   "managerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "parentDepartmentId": 0
+  "parentDepartmentId": null
 }   
 */
+  const employeesOptions = employees.map((employee) => {
+    return {
+      label: `${employee.firstName} ${employee.lastName}`,
+      value: employee.userId,
+    };
+  });
   return (
     <div className="mx-auto flex flex-col items-center w-[800px] gap-8 bg-white rounded-2xl border border-gray-200 px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6 ">
       <Button type="default" onClick={onClick} className="self-end ">
@@ -45,15 +52,7 @@ const AddDepartmentForm = ({ onFinish, onClick }) => {
           name="managerId"
           rules={[{ required: true, message: "Please select Manager" }]}
         >
-          <Select
-            placeholder="Select Manager"
-            options={[
-              {
-                label: "s",
-                value: "s",
-              },
-            ]}
-          />
+          <Select placeholder="Select Manager" options={employeesOptions} />
         </Form.Item>
         <Form.Item
           label="Parent Department"
@@ -67,7 +66,7 @@ const AddDepartmentForm = ({ onFinish, onClick }) => {
             options={[
               {
                 label: "None",
-                value: "0",
+                value: "none (should be null for mosaad",
               },
             ]}
           />

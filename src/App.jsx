@@ -7,6 +7,8 @@ import Shifts from "./pages/Shifts/Shifts";
 import Departments from "./pages/Department/Departments";
 import LoginSignupPage from "./components/LoginSignupPage";
 import Employees from "./pages/Employees/Employees";
+import DepartmentsProvider from "./context/DepartmentsContext";
+import EmployeesProvider from "./context/EmployeesContext";
 
 function App() {
   return (
@@ -17,8 +19,25 @@ function App() {
         <Route path="/branches" element={<Branches />} />
         <Route path="/publicholiday" element={<PublicHoliday />} />
         <Route path="/shifts" element={<Shifts />} />
-        <Route path="/employees" element={<Employees />} />
-        <Route path="/departments" element={<Departments />} />
+        <Route
+          path="/employees"
+          element={
+            <EmployeesProvider>
+              <Employees />
+            </EmployeesProvider>
+          }
+        />
+
+        <Route
+          path="/departments"
+          element={
+            <EmployeesProvider>
+              <DepartmentsProvider>
+                <Departments />
+              </DepartmentsProvider>
+            </EmployeesProvider>
+          }
+        />
       </Route>
     </Routes>
   );

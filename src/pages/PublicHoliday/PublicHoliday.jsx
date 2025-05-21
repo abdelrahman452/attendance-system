@@ -22,6 +22,7 @@ const PublicHoliday = () => {
       };
       await axios.post(`api/PublicHolidays/Add`, formattedValues);
       message.success("Holiday added successfully");
+      getHolidays();
       setShowForm(false);
     } catch (error) {
       console.error(error);
@@ -37,7 +38,12 @@ const PublicHoliday = () => {
       const data = response.data.response;
       setHolidays(
         data.map((item) => {
-          return { ...item, key: item.id };
+          return {
+            ...item,
+            key: item.id,
+            startDate: item.startDate.split("T")[0],
+            endDate: item.endDate.split("T")[0],
+          };
         })
       );
     } catch (error) {

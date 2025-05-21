@@ -43,6 +43,27 @@ const AddEmployeeForm = ({ onFinish, onClick }) => {
         >
           <Input />
         </Form.Item>
+        <Form.Item
+          label="Employee Code"
+          name="employeeCode"
+          rules={[{ required: true, message: "Please input Employee Code" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Employee Code"
+          name="employeeCode"
+          rules={[{ required: true, message: "Please input Employee Code" }]}
+        >
+          <Input />
+        </Form.Item>
+        <Form.Item
+          label="Employee Code"
+          name="departmentId"
+          rules={[{ required: true, message: "Please input Employee Code" }]}
+        >
+          <Input />
+        </Form.Item>
 
         <Form.Item>
           <Button type="primary" htmlType="submit">
