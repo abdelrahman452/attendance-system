@@ -10,7 +10,11 @@ const EmployeesProvider = ({ children }) => {
       const data = response.data.response;
       setEmployees(
         data.map((item) => {
-          return { ...item, key: item.userId };
+          return {
+            ...item,
+            key: item.userId,
+            hireDate: item.hireDate.split("T")[0],
+          };
         })
       );
     } catch (error) {

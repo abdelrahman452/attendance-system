@@ -1,12 +1,34 @@
-import { Table, Button } from "antd";
+import { Table, Button, message } from "antd";
 import { useState } from "react";
 import { departmentsColumn } from "../../constant";
 import AddDepartmentForm from "./AddDepartmentForm";
 import useDepartments from "../../hooks/useDepartments";
+import axios from "../../Services/axiosInstance";
 
 const Departments = () => {
   const [showForm, setShowForm] = useState(null);
   const { departments, reFetch } = useDepartments();
+  //add department
+  const handleAddDepartment = async (values) => {
+    message.destroy();
+    const payload = {
+      ...values,
+      parentDepartmentId:
+        values.parentDepartmentId === "null" ? null : values.parentDepartmentId,
+    };
+
+    try {
+      await axios.post(`api/Departments/CreateDepartment`, payload);
+      message.success("Department added successfully");
+      reFetch();
+      setShowForm(false);
+    } catch (error) {
+      console.error(error);
+      message.error("Something went wrong. Please try again.");
+    } finally {
+      console.log("done");
+    }
+  };
   return (
     <>
       {!showForm && (
@@ -39,7 +61,7 @@ const Departments = () => {
       )}
       {showForm && (
         <AddDepartmentForm
-          // onFinish={}
+          onFinish={handleAddDepartment}
           onClick={() => setShowForm(false)}
           departments={departments}
         />

@@ -9,6 +9,7 @@ import LoginSignupPage from "./components/LoginSignupPage";
 import Employees from "./pages/Employees/Employees";
 import DepartmentsProvider from "./context/DepartmentsContext";
 import EmployeesProvider from "./context/EmployeesContext";
+import BranchProvider from "./context/BranchContext";
 
 function App() {
   return (
@@ -22,9 +23,13 @@ function App() {
         <Route
           path="/employees"
           element={
-            <EmployeesProvider>
-              <Employees />
-            </EmployeesProvider>
+            <BranchProvider>
+              <DepartmentsProvider>
+                <EmployeesProvider>
+                  <Employees />
+                </EmployeesProvider>
+              </DepartmentsProvider>
+            </BranchProvider>
           }
         />
 

@@ -1,24 +1,18 @@
 import { Button, Form, Input, Select } from "antd";
 import useEmployees from "../../hooks/useEmployees";
+import useDepartments from "../../hooks/useDepartments";
 const AddDepartmentForm = ({ onFinish, onClick }) => {
   const { employees } = useEmployees();
-  /**Parent Department:
-[▼ None (Top-level)       ] ← will send null
-[   Marketing             ]
-[   IT                    ]
-[   HR                    ] 
-{
-  "name": "string",
-  "description": "string",
-  "managerId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  "parentDepartmentId": null
-}   
-*/
+  const { departments } = useDepartments();
+
   const employeesOptions = employees.map((employee) => {
     return {
       label: `${employee.firstName} ${employee.lastName}`,
       value: employee.userId,
     };
+  });
+  const departmentOptions = departments.map((depart) => {
+    return { label: depart.name, value: depart.id };
   });
   return (
     <div className="mx-auto flex flex-col items-center w-[800px] gap-8 bg-white rounded-2xl border border-gray-200 px-5 pb-5 pt-5 dark:border-gray-800 dark:bg-white/[0.03] sm:px-6 sm:pt-6 ">
@@ -63,12 +57,7 @@ const AddDepartmentForm = ({ onFinish, onClick }) => {
         >
           <Select
             placeholder="Select Parent Department"
-            options={[
-              {
-                label: "None",
-                value: "none (should be null for mosaad",
-              },
-            ]}
+            options={[{ label: "None", value: "null" }, ...departmentOptions]}
           />
         </Form.Item>
 

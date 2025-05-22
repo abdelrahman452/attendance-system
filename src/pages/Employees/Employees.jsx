@@ -9,6 +9,7 @@ const Employees = () => {
   const { employees } = useEmployees();
   //add holiday
   const addEmployee = async (values) => {
+    console.log(values);
     message.destroy();
     try {
       const formattedValues = {
