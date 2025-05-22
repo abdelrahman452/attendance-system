@@ -28,7 +28,7 @@ const EmployeesProvider = ({ children }) => {
     getEmployees();
   }, []);
   return (
-    <EmployeesContext.Provider value={{ employees }}>
+    <EmployeesContext.Provider value={{ employees, refetch: getEmployees }}>
       {children}
     </EmployeesContext.Provider>
   );

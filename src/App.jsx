@@ -17,7 +17,14 @@ function App() {
       <Route path="/login" element={<LoginSignupPage />} />
       <Route element={<AppLayout />}>
         <Route index path="/" element={<Home />} />
-        <Route path="/branches" element={<Branches />} />
+        <Route
+          path="/branches"
+          element={
+            <BranchProvider>
+              <Branches />
+            </BranchProvider>
+          }
+        />
         <Route path="/publicholiday" element={<PublicHoliday />} />
         <Route path="/shifts" element={<Shifts />} />
         <Route

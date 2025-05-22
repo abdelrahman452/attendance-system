@@ -1,19 +1,21 @@
 import { Table, Button, message } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import AddBranchForm from "./AddBranchForm";
 import { branchesColumn } from "../../constant/index";
 import axios from "../../Services/axiosInstance";
+import useBranches from "../../hooks/useBranches";
 
 const Branches = () => {
   const [showForm, setShowForm] = useState(null);
-  const [branches, setBranches] = useState([]);
+  const { branches, refetch } = useBranches();
+
   //Add Branch Function
   const addBranches = async (values) => {
     try {
       const response = await axios.post(`api/Branches/CreateBranch`, values);
 
-      getBranches();
       message.success("Branch added successfully");
+      refetch();
       setShowForm(false);
     } catch (error) {
       if (error.response && error.response.status === 400) {
@@ -24,30 +26,6 @@ const Branches = () => {
     }
   };
 
-  //getting Branches Data
-  const getBranches = async () => {
-    message.destroy();
-
-    try {
-      const response = await axios.get(`api/Branches/GetAllBranches`);
-
-      const data = response.data.response;
-      setBranches(
-        data?.map((item) => ({
-          ...item,
-          key: item.id,
-        }))
-      );
-    } catch (error) {
-      console.error(error);
-    } finally {
-      console.log("Branches fetched successfully");
-    }
-  };
-
-  useEffect(() => {
-    getBranches();
-  }, []);
   return (
     <>
       {!showForm && (
