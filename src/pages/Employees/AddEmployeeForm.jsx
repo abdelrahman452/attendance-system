@@ -49,21 +49,21 @@ const AddEmployeeForm = ({ onFinish, onClick, roles }) => {
           name="firstName"
           rules={[{ required: true, message: "Please input First Name" }]}
         >
-          <Input />
+          <Input placeholder="Enter your first name" />
         </Form.Item>
         <Form.Item
           label="Last Name"
           name="lastName"
           rules={[{ required: true, message: "Please input Last Name" }]}
         >
-          <Input />
+          <Input placeholder="Enter your last name" />
         </Form.Item>
         <Form.Item
           label="Employee Code"
           name="employeeCode"
           rules={[{ required: true, message: "Please input Employee Code" }]}
         >
-          <Input />
+          <Input placeholder="Enter your employee code" />
         </Form.Item>
         <Form.Item
           label="Email"
@@ -74,14 +74,14 @@ const AddEmployeeForm = ({ onFinish, onClick, roles }) => {
             { type: "email", message: "Please valid email" },
           ]}
         >
-          <Input />
+          <Input placeholder="Enter your email" />
         </Form.Item>
         <Form.Item
           label="username"
           name="userName"
           rules={[{ required: true, message: "Please input username" }]}
         >
-          <Input />
+          <Input placeholder="Enter your username" />
         </Form.Item>
         <Form.Item
           label="Password"
@@ -154,7 +154,13 @@ const AddEmployeeForm = ({ onFinish, onClick, roles }) => {
             options={rolesOptions}
           />
         </Form.Item>
-        <Form.Item>
+        <Form.Item
+          style={{
+            gridColumn: "1 / -1",
+            textAlign: "center",
+            marginTop: "20px",
+          }}
+        >
           <Button type="primary" htmlType="submit">
             Submit
           </Button>

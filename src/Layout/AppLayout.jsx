@@ -29,6 +29,13 @@ const items = [
   getItem("Shifts", "4", <FileOutlined />, null, "/shifts"),
   getItem("Employees", "5", <PieChartOutlined />, null, "/employees"),
   getItem("Departments", "6", <PieChartOutlined />, null, "/departments"),
+  getItem(
+    "Employee Vacances",
+    "7",
+    <PieChartOutlined />,
+    null,
+    "/employeevacances"
+  ),
   // getItem(
   //   "Team",
   //   "sub2",

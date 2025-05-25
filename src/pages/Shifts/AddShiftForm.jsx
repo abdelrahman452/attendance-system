@@ -19,7 +19,10 @@ const AddShiftForm = ({ onClick, onFinish }) => {
           name="name"
           rules={[{ required: true, message: "Please input Branch Name" }]}
         >
-          <Input className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]" />
+          <Input
+            className=" border-[#d9d9d9] rounded-lg h-8 dark:bg-[#202a3f] dark:border-[#434343]"
+            placeholder="Enter branch name"
+          />
         </Form.Item>
 
         <Form.Item

@@ -10,6 +10,7 @@ import Employees from "./pages/Employees/Employees";
 import DepartmentsProvider from "./context/DepartmentsContext";
 import EmployeesProvider from "./context/EmployeesContext";
 import BranchProvider from "./context/BranchContext";
+import EmployeeVacances from "./pages/EmployeeVacances/EmployeeVacances";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
               <DepartmentsProvider>
                 <Departments />
               </DepartmentsProvider>
+            </EmployeesProvider>
+          }
+        />
+        <Route
+          path="/employeevacances"
+          element={
+            <EmployeesProvider>
+              <EmployeeVacances />
             </EmployeesProvider>
           }
         />
