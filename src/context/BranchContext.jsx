@@ -7,8 +7,6 @@ const BranchProvider = ({ children }) => {
   const [branches, setBranches] = useState([]);
   //getting Branches Data
   const getBranches = async () => {
-    message.destroy();
-
     try {
       const response = await axios.get(`api/Branches/GetAllBranches`);
 

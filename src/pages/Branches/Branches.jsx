@@ -11,8 +11,9 @@ const Branches = () => {
 
   //Add Branch Function
   const addBranches = async (values) => {
+    message.destroy();
     try {
-      const response = await axios.post(`api/Branches/CreateBranch`, values);
+      await axios.post(`api/Branches/CreateBranch`, values);
 
       message.success("Branch added successfully");
       refetch();

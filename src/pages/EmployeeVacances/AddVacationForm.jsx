@@ -2,12 +2,6 @@ import { Button, Form, Input, Select, DatePicker } from "antd";
 import useEmployees from "../../hooks/useEmployees";
 
 const AddVacationForm = ({ onFinish, onClick }) => {
-  //     {
-  //   "employeeId": "3fa85f64-5717-4562-b3fc-2c963f66afa6",
-  //   "startDate": "2025-05-25T09:48:18.874Z",
-  //   "endDate": "2025-05-25T09:48:18.874Z",
-  //   "reason": "string"
-  // }
   const { employees } = useEmployees();
   const employeesOptions = employees.map((employee) => {
     return {
@@ -51,6 +45,13 @@ const AddVacationForm = ({ onFinish, onClick }) => {
           rules={[{ required: true, message: "Please select End Date" }]}
         >
           <DatePicker style={{ width: "100%" }} />
+        </Form.Item>
+        <Form.Item
+          label="Reason"
+          name="reason"
+          rules={[{ required: true, message: "Please enter a reason" }]}
+        >
+          <Input.TextArea style={{ width: "100%" }} />
         </Form.Item>
 
         <Form.Item

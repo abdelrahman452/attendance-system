@@ -6,7 +6,7 @@ import { employeesVacationsColumn } from "../../constant";
 
 const EmployeeVacances = () => {
   const [showForm, setShowForm] = useState(null);
-  const [employeesVacations, setEmployeesVacations] = useState(null);
+  const [employeesVacations, setEmployeesVacations] = useState([]);
   //add employee vacation
   const addEmployeeVacation = async (values) => {
     message.destroy();
@@ -22,13 +22,14 @@ const EmployeeVacances = () => {
       getEmployeesVacations();
       setShowForm(false);
     } catch (error) {
-      console.error(error);
-      message.error("Something went wrong. Please try again.");
+      message.error(
+        error.response?.data?.errors[0].message ||
+          "An error occurred while adding the employee vacation"
+      );
     } finally {
       console.log("done");
     }
   };
-  console.log(employeesVacations);
   const getEmployeesVacations = async () => {
     try {
       const response = await axios.get("api/EmployeeVacances/GetAll");
@@ -40,7 +41,8 @@ const EmployeeVacances = () => {
             ...item,
             key: item.id,
             status: item.status === 1 ? "accepted" : "Pending",
-            // startDate: item.startDate.format("YYYY-MM-DD"),
+            startDate: item.startDate.split("T")[0],
+            endDate: item.endDate.split("T")[0],
           };
         })
       );

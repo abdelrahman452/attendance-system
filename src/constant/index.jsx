@@ -108,12 +108,12 @@ const employeesColumn = [
   },
   {
     title: "Department",
-    dataIndex: "department",
-    key: "department",
+    dataIndex: "departmentName",
+    key: "departmentName",
     sorter: (a, b) => a.department.localeCompare(b.department),
   },
   {
-    title: "Branch Name",
+    title: "Branch",
     dataIndex: "branchName",
     key: "branchName",
     sorter: (a, b) => a.branchName.localeCompare(b.branchName),
@@ -123,6 +123,17 @@ const employeesColumn = [
     dataIndex: "status",
     key: "status",
     sorter: (a, b) => a.status.localeCompare(b.status),
+    render: (_, record) => {
+      return (
+        <Tag
+          color={
+            record?.status?.toLowerCase() === "active" ? "success" : "warning"
+          }
+        >
+          {record.status}
+        </Tag>
+      );
+    },
   },
   {
     title: "Hire Date",
