@@ -78,7 +78,7 @@ const EmployeeVacances = () => {
               sticky
               scroll={{ x: "max-content" }}
               rowClassName={(_, index) => {
-                return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
+                return index % 2 === 0 ? "" : "bg-[#f9fafb]";
               }}
               columns={employeesVacationsColumn}
               dataSource={employeesVacations}

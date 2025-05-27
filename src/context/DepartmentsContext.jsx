@@ -7,8 +7,6 @@ const DepartmentsProvider = ({ children }) => {
   const [departments, setDepartments] = useState([]);
   //Get Department Data
   const getDepartments = async () => {
-    message.destroy();
-
     try {
       const response = await axios.get(`api/Departments/GetAllDepartments`);
 

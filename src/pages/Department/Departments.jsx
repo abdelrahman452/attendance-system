@@ -16,7 +16,7 @@ const Departments = () => {
       parentDepartmentId:
         values.parentDepartmentId === "null" ? null : values.parentDepartmentId,
     };
-
+    console.log(payload);
     try {
       await axios.post(`api/Departments/CreateDepartment`, payload);
       message.success("Department added successfully");
@@ -50,7 +50,7 @@ const Departments = () => {
               sticky
               scroll={{ x: "max-content" }}
               rowClassName={(_, index) => {
-                return index % 2 === 0 ? "" : "bg-[#f9fafb] dark:bg-gray-700";
+                return index % 2 === 0 ? "" : "bg-[#f9fafb] ";
               }}
               columns={departmentsColumn}
               dataSource={departments}
