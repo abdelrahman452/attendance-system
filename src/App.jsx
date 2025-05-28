@@ -11,6 +11,8 @@ import DepartmentsProvider from "./context/DepartmentsContext";
 import EmployeesProvider from "./context/EmployeesContext";
 import BranchProvider from "./context/BranchContext";
 import EmployeeVacances from "./pages/EmployeeVacances/EmployeeVacances";
+import AssignEmployees from "./pages/AssignEmplyees/AssignEmployees";
+import ManualLogs from "./pages/ManualLogs/ManualLogs";
 
 function App() {
   return (
@@ -18,6 +20,16 @@ function App() {
       <Route path="/login" element={<LoginSignupPage />} />
       <Route element={<AppLayout />}>
         <Route index path="/" element={<Home />} />
+
+        <Route
+          path="/manuallogs"
+          element={
+            <EmployeesProvider>
+              <ManualLogs />
+            </EmployeesProvider>
+          }
+        />
+
         <Route
           path="/branches"
           element={
@@ -41,6 +53,14 @@ function App() {
           }
         />
 
+        <Route
+          path="/assignemployees"
+          element={
+            <EmployeesProvider>
+              <AssignEmployees />
+            </EmployeesProvider>
+          }
+        />
         <Route
           path="/departments"
           element={

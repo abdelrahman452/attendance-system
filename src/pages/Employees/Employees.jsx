@@ -16,7 +16,6 @@ const Employees = () => {
         ...values,
         hireDate: values.hireDate.format("YYYY-MM-DDTHH:mm:ss.SSS[Z]"),
       };
-      console.log(formattedValues);
       await axios.post(`api/Auth/Register`, formattedValues);
       message.success("Employee added successfully");
       refetch();

@@ -1,4 +1,5 @@
-import { Tag } from "antd";
+import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
+import { Button, Tag, Tooltip } from "antd";
 const branchesColumn = [
   {
     title: "Branch Name",
@@ -193,6 +194,60 @@ const employeesVacationsColumn = [
     },
   },
 ];
+const employeesLogsColumn = (attendEmployee, employees) => [
+  {
+    title: "User Name",
+    dataIndex: "userName",
+    key: "userName",
+    sorter: (a, b) => a.userName.localeCompare(b.userName),
+    filters: employees.map((employee) => {
+      return { text: employee.userName, value: employee.userName };
+    }),
+    filterMode: "tree",
+    filterSearch: true,
+    onFilter: (value, record) => record.userName.startsWith(value),
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+    key: "email",
+    sorter: (a, b) => a.email.localeCompare(b.email),
+    filters: employees.map((employee) => {
+      return { text: employee.email, value: employee.email };
+    }),
+    filterMode: "tree",
+    filterSearch: true,
+    onFilter: (value, record) => record.email.startsWith(value),
+  },
+
+  {
+    title: "Check In Time",
+    dataIndex: "log",
+    key: "log",
+    render: (_, record) => {
+      return (
+        <div className="flex  gap-4">
+          <Tooltip placement="left" title={"Check in"} color={"green"}>
+            <LoginOutlined
+              onClick={() =>
+                attendEmployee({ inOutMode: 0, employeeId: record.userId })
+              }
+              style={{ color: "green", fontSize: "40px", cursor: "pointer" }}
+            />
+          </Tooltip>
+          <Tooltip placement="right" title={"Check out"} color={"red"}>
+            <LogoutOutlined
+              onClick={() =>
+                attendEmployee({ inOutMode: 1, employeeId: record.userId })
+              }
+              style={{ color: "red", fontSize: "40px", cursor: "pointer" }}
+            />
+          </Tooltip>
+        </div>
+      );
+    },
+  },
+];
 export {
   branchesColumn,
   holidaysColumn,
@@ -200,4 +255,5 @@ export {
   departmentsColumn,
   employeesColumn,
   employeesVacationsColumn,
+  employeesLogsColumn,
 };

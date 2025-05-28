@@ -16,7 +16,6 @@ const Departments = () => {
       parentDepartmentId:
         values.parentDepartmentId === "null" ? null : values.parentDepartmentId,
     };
-    console.log(payload);
     try {
       await axios.post(`api/Departments/CreateDepartment`, payload);
       message.success("Department added successfully");

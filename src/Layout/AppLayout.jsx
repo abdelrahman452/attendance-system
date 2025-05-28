@@ -24,14 +24,16 @@ function getItem(label, key, icon, children, path) {
 
 const items = [
   getItem("Dashboard", "1", <PieChartOutlined />, null, "/"),
-  getItem("Branches", "2", <UserOutlined />, null, "/branches"),
-  getItem("Public Holiday", "3", <DesktopOutlined />, null, "/publicholiday"),
-  getItem("Shifts", "4", <FileOutlined />, null, "/shifts"),
-  getItem("Employees", "5", <PieChartOutlined />, null, "/employees"),
-  getItem("Departments", "6", <PieChartOutlined />, null, "/departments"),
+  getItem("Manual Logs", "2", <UserOutlined />, null, "/manuallogs"),
+  getItem("Branches", "3", <UserOutlined />, null, "/branches"),
+  getItem("Public Holiday", "4", <DesktopOutlined />, null, "/publicholiday"),
+  getItem("Shifts", "5", <FileOutlined />, null, "/shifts"),
+  getItem("Employees", "6", <PieChartOutlined />, null, "/employees"),
+  getItem("Assign Employees", "7", <UserOutlined />, null, "/assignemployees"),
+  getItem("Departments", "8", <PieChartOutlined />, null, "/departments"),
   getItem(
     "Employee Vacances",
-    "7",
+    "9",
     <PieChartOutlined />,
     null,
     "/employeevacances"
@@ -120,7 +122,7 @@ const AppLayout = () => {
             style={{
               padding: 24,
               minHeight: 360,
-              background: colorBgContainer,
+              // background: colorBgContainer,
               borderRadius: borderRadiusLG,
             }}
           >
