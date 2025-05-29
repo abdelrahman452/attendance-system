@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Table, Button, message } from "antd";
 import AssignEmployeeForm from "./AsignEmployeeForm";
 import axios from "../../Services/axiosInstance";
@@ -24,6 +24,26 @@ const AssignEmployees = () => {
     }
   };
 
+  const getEmployeesShifts = async () => {
+    try {
+      const response = await axios.get(
+        "api/ShiftEmployees/GetAllShiftsAssignedToEmployees"
+      );
+      const data = response.data.response;
+      setShifts(
+        data.map((item) => {
+          return { ...item, key: item.id };
+        })
+      );
+    } catch (error) {
+      console.error(`${error.message}`);
+    } finally {
+      console.log("done");
+    }
+  };
+  useEffect(() => {
+    getEmployeesShifts();
+  }, []);
   const getShifts = async () => {
     try {
       const response = await axios.get("api/Shifts/GetAll");

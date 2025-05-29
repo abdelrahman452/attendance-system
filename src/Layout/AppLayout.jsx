@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import {
+  ApartmentOutlined,
+  AppstoreOutlined,
+  BarChartOutlined,
+  CalendarOutlined,
+  ClockCircleOutlined,
+  DashboardOutlined,
   DesktopOutlined,
   FileOutlined,
+  FileTextOutlined,
   PieChartOutlined,
+  RestOutlined,
   TeamOutlined,
-  UserOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import { Breadcrumb, Layout, Menu, theme } from "antd";
 import { useNavigate, useLocation, Outlet } from "react-router-dom";
@@ -23,20 +31,75 @@ function getItem(label, key, icon, children, path) {
 }
 
 const items = [
-  getItem("Dashboard", "1", <PieChartOutlined />, null, "/"),
-  getItem("Manual Logs", "2", <UserOutlined />, null, "/manuallogs"),
-  getItem("Branches", "3", <UserOutlined />, null, "/branches"),
-  getItem("Public Holiday", "4", <DesktopOutlined />, null, "/publicholiday"),
-  getItem("Shifts", "5", <FileOutlined />, null, "/shifts"),
-  getItem("Employees", "6", <PieChartOutlined />, null, "/employees"),
-  getItem("Assign Employees", "7", <UserOutlined />, null, "/assignemployees"),
-  getItem("Departments", "8", <PieChartOutlined />, null, "/departments"),
+  getItem(
+    "Dashboard",
+    "1",
+    <DashboardOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/"
+  ),
+  getItem(
+    "Manual Logs",
+    "2",
+    <FileTextOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/manuallogs"
+  ),
+  getItem(
+    "Branches",
+    "3",
+    <ApartmentOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/branches"
+  ),
+  getItem(
+    "Public Holiday",
+    "4",
+    <CalendarOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/publicholiday"
+  ),
+  getItem(
+    "Shifts",
+    "5",
+    <ClockCircleOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/shifts"
+  ),
+  getItem(
+    "Employees",
+    "6",
+    <TeamOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/employees"
+  ),
+  getItem(
+    "Assign Employees",
+    "7",
+    <UserAddOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/assignemployees"
+  ),
+  getItem(
+    "Departments",
+    "8",
+    <AppstoreOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/departments"
+  ),
   getItem(
     "Employee Vacances",
     "9",
-    <PieChartOutlined />,
+    <RestOutlined style={{ fontSize: "x-large" }} />,
     null,
     "/employeevacances"
+  ),
+  getItem(
+    "Reports",
+    "10",
+    <BarChartOutlined style={{ fontSize: "x-large" }} />,
+    null,
+    "/reports"
   ),
   // getItem(
   //   "Team",
@@ -120,7 +183,6 @@ const AppLayout = () => {
           </Breadcrumb>
           <div
             style={{
-              padding: 24,
               minHeight: 360,
               // background: colorBgContainer,
               borderRadius: borderRadiusLG,

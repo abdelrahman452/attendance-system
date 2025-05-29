@@ -13,6 +13,9 @@ import BranchProvider from "./context/BranchContext";
 import EmployeeVacances from "./pages/EmployeeVacances/EmployeeVacances";
 import AssignEmployees from "./pages/AssignEmplyees/AssignEmployees";
 import ManualLogs from "./pages/ManualLogs/ManualLogs";
+import AddShiftForm from "./pages/Shifts/AddShiftForm";
+import Reports from "./pages/Reports/Reports";
+import AddBranchForm from "./pages/Branches/AddBranchForm";
 
 function App() {
   return (
@@ -37,9 +40,16 @@ function App() {
               <Branches />
             </BranchProvider>
           }
-        />
+        >
+          <Route index element={<Branches />} />
+          <Route path="create" element={<AddBranchForm />} />
+        </Route>
         <Route path="/publicholiday" element={<PublicHoliday />} />
-        <Route path="/shifts" element={<Shifts />} />
+
+        <Route path="/shifts" element={<Shifts />}>
+          <Route index element={<Shifts />} />
+          <Route path="create" element={<AddShiftForm />} />
+        </Route>
         <Route
           path="/employees"
           element={
@@ -79,6 +89,8 @@ function App() {
             </EmployeesProvider>
           }
         />
+
+        <Route path="/reports" element={<Reports />} />
       </Route>
     </Routes>
   );

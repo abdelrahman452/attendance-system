@@ -1,5 +1,5 @@
 import { LoginOutlined, LogoutOutlined } from "@ant-design/icons";
-import { Button, Tag, Tooltip } from "antd";
+import { Tag, Tooltip } from "antd";
 const branchesColumn = [
   {
     title: "Branch Name",
@@ -83,8 +83,8 @@ const departmentsColumn = [
   },
   {
     title: "Department Manager",
-    dataIndex: "d",
-    key: "d",
+    dataIndex: "managerName",
+    key: "managerName",
     sorter: (a, b) => a.d.localeCompare(b.d),
   },
 ];
@@ -155,6 +155,59 @@ const employeesColumn = [
     sorter: (a, b) => a.userName.localeCompare(b.userName),
   },
 ];
+
+const reportsColumns = [
+  {
+    title: "Full Name",
+    dataIndex: "fullName",
+    key: "fullName",
+    sorter: (a, b) => a.fullName.localeCompare(b.fullName),
+  },
+  {
+    title: "Department Name",
+    dataIndex: "departmentName",
+    key: "departmentName",
+    sorter: (a, b) => a.departmentName.localeCompare(b.departmentName),
+  },
+  {
+    title: "Branch Name",
+    dataIndex: "branchName",
+    key: "endDate",
+    sorter: (a, b) => a.branchName.localeCompare(b.branchName),
+  },
+  {
+    title: "Check In",
+    dataIndex: "firstIn",
+    key: "firstIn",
+  },
+  {
+    title: "Check Out",
+    dataIndex: "lastOut",
+    key: "lastOut",
+  },
+  {
+    title: "Total Work Hours",
+    dataIndex: "totalWorkHours",
+    key: "totalWorkHours",
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    key: "status",
+    render: (_, record) => {
+      return (
+        <Tag
+          color={
+            record?.status?.toLowerCase() === "active" ? "#87d068" : "#f50"
+          }
+        >
+          {record.status}
+        </Tag>
+      );
+    },
+  },
+];
+
 const employeesVacationsColumn = [
   {
     title: "Employee Name",
@@ -194,30 +247,18 @@ const employeesVacationsColumn = [
     },
   },
 ];
-const employeesLogsColumn = (attendEmployee, employees) => [
+const employeesLogsColumn = (attendEmployee) => [
   {
     title: "User Name",
     dataIndex: "userName",
     key: "userName",
     sorter: (a, b) => a.userName.localeCompare(b.userName),
-    filters: employees.map((employee) => {
-      return { text: employee.userName, value: employee.userName };
-    }),
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.userName.startsWith(value),
   },
   {
     title: "Email",
     dataIndex: "email",
     key: "email",
     sorter: (a, b) => a.email.localeCompare(b.email),
-    filters: employees.map((employee) => {
-      return { text: employee.email, value: employee.email };
-    }),
-    filterMode: "tree",
-    filterSearch: true,
-    onFilter: (value, record) => record.email.startsWith(value),
   },
 
   {
@@ -256,4 +297,5 @@ export {
   employeesColumn,
   employeesVacationsColumn,
   employeesLogsColumn,
+  reportsColumns,
 };
