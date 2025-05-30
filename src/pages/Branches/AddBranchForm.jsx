@@ -33,16 +33,40 @@ const AddBranchForm = ({ onClick, onFinish }) => {
         <Form.Item
           label="Latitude"
           name="latitude"
-          rules={[{ required: true, message: "Please input Branch Latitude" }]}
+          rules={[
+            { required: true, message: "Please enter a valid latitude" },
+            {
+              type: "number",
+              min: -90,
+              max: 90,
+              message: "Latitude must be between -90 and 90",
+            },
+          ]}
         >
-          <Input inputMode="numeric" pattern="[0-9]*" />
+          <InputNumber
+            step={0.000001}
+            placeholder="Enter latitude (-90 to 90)"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
         <Form.Item
           label="Longitude"
           name="longitude"
-          rules={[{ required: true, message: "Please input Branch Longitude" }]}
+          rules={[
+            { required: true, message: "Please enter a valid longitude" },
+            {
+              type: "number",
+              min: -180,
+              max: 180,
+              message: "Longitude must be between -180 and 180",
+            },
+          ]}
         >
-          <Input inputMode="numeric" pattern="[0-9]*" />
+          <InputNumber
+            step={0.000001}
+            placeholder="Enter longitude (-180 to 180)"
+            style={{ width: "100%" }}
+          />
         </Form.Item>
 
         <Form.Item>
